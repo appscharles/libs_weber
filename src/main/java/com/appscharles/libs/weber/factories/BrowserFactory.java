@@ -3,6 +3,7 @@ package com.appscharles.libs.weber.factories;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import com.appscharles.libs.weber.installers.Installer;
 import com.appscharles.libs.weber.installers.business.configurators.InstallerConfigurator;
+import com.appscharles.libs.weber.validators.ExistBrowserValidator;
 
 import java.io.File;
 import java.net.URL;
@@ -20,17 +21,19 @@ public class BrowserFactory {
 
     private String version;
 
-    private BrowserFactory() {
+    private Boolean replaceExisting;
 
+    private BrowserFactory() {
+        this.replaceExisting = false;
     }
 
     /**
      * Create browser factory.
      *
-     * @param browserURL the browser url
-     * @param browserDir the browser dir
-     * @param name       the name
-     * @param version    the version
+     * @param browserURL  the browser url
+     * @param browsersDir the browsers dir
+     * @param name        the name
+     * @param version     the version
      * @return the browser factory
      */
     public static BrowserFactory create(URL browserURL, File browsersDir, String name, String version) {
@@ -50,9 +53,21 @@ public class BrowserFactory {
      */
     public File build() throws WeberException {
         File browserDir = new File(this.browsersDir, this.version + "/" + this.name);
-        File browserDownloadDir = new File(this.browsersDir, "download");
-        InstallerConfigurator configurator = new InstallerConfigurator(browserDir, this.browserURL, browserDownloadDir);
-        Installer.launch(configurator);
+        if (this.replaceExisting || false == ExistBrowserValidator.exist(this.browsersDir, this.name, this.version)) {
+            File browserDownloadDir = new File(this.browsersDir, "download");
+            InstallerConfigurator configurator = new InstallerConfigurator(browserDir, this.browserURL, browserDownloadDir);
+            Installer.launch(configurator);
+        }
         return browserDir;
+    }
+
+    /**
+     * Enable replace existing browser factory.
+     *
+     * @return the browser factory
+     */
+    public BrowserFactory enableReplaceExisting() {
+        this.replaceExisting = true;
+        return this;
     }
 }

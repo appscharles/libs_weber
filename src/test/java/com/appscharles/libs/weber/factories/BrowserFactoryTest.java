@@ -2,6 +2,7 @@ package com.appscharles.libs.weber.factories;
 
 import com.appscharles.libs.weber.TestCase;
 import com.appscharles.libs.weber.exceptions.WeberException;
+import com.appscharles.libs.weber.finders.AvailablePortFinder;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
@@ -34,13 +35,13 @@ public class BrowserFactoryTest extends TestCase {
 
     @Test
     public void shouldOpenBrowser() throws IOException, WeberException {
-        File browsersDir = new File("E:\\browsers");//this.temp.newFolder("browsers_dir");
+        File browsersDir = new File("E:\\others\\browsers_test");
         BrowserFactory.create(
                 new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip"),
-                browsersDir, "default", "68.0").build();
+                browsersDir, "myApp", "68.0").build();
 
-        Launcher launcher = new Launcher(12112);
-        try (SessionFactory factory = launcher.launch(new File("E:\\browsers\\68.0\\myApp", "MyChrome.exe").toPath());
+        Launcher launcher = new Launcher(AvailablePortFinder.findBetween(10000, 15000));
+        try (SessionFactory factory = launcher.launch(new File("E:\\others\\browsers_test\\68.0\\myApp", "MyChrome.exe").toPath());
              Session session = factory.create()) {
             session.navigate("https://news.ycombinator.com");
             session.waitDocumentReady();
