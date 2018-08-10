@@ -24,11 +24,8 @@ public class Installer {
             stage.setResizable(false);
             if (installerConfigurator.getTest()) {
                 Platform.setImplicitExit(false);
-                stage.showFX();
-                stage.closeFX();
-            } else {
-                stage.showAndWaitFX();
             }
+            stage.showAndWaitFX();
             if (controller.getException() != null){
                 throw new WeberException(controller.getException());
             }

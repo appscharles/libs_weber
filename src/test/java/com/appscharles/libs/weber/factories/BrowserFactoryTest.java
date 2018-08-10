@@ -29,19 +29,19 @@ public class BrowserFactoryTest extends TestCase {
         File browsersDir = this.temp.newFolder("browsers_dir");
         File browserDir = BrowserFactory.create(
                 new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0_test.zip"),
-                browsersDir, "default", "68.0").build();
+                browsersDir, "default", "68.0").enableTest().build();
         Assert.assertTrue(new File(browserDir, "MyChrome.exe").exists());
     }
 
     @Test
     public void shouldOpenBrowser() throws IOException, WeberException {
-        File browsersDir = new File("E:\\others\\browsers_test");
+        File browsersDir = new File(System.getProperty("java.io.tmpdir"), "browsers_test");
         BrowserFactory.create(
                 new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip"),
-                browsersDir, "myApp", "68.0").build();
+                browsersDir, "myApp", "68.0").enableTest().build();
 
         Launcher launcher = new Launcher(AvailablePortFinder.findBetween(10000, 15000));
-        try (SessionFactory factory = launcher.launch(new File("E:\\others\\browsers_test\\68.0\\myApp", "MyChrome.exe").toPath());
+        try (SessionFactory factory = launcher.launch(new File(System.getProperty("java.io.tmpdir") + "\\browsers_test\\68.0\\myApp", "MyChrome.exe").toPath());
              Session session = factory.create()) {
             session.navigate("https://news.ycombinator.com");
             session.waitDocumentReady();

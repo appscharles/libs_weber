@@ -23,8 +23,11 @@ public class BrowserFactory {
 
     private Boolean replaceExisting;
 
+    private Boolean test;
+
     private BrowserFactory() {
         this.replaceExisting = false;
+        this.test = false;
     }
 
     /**
@@ -56,6 +59,7 @@ public class BrowserFactory {
         if (this.replaceExisting || false == ExistBrowserValidator.exist(this.browsersDir, this.name, this.version)) {
             File browserDownloadDir = new File(this.browsersDir, "download");
             InstallerConfigurator configurator = new InstallerConfigurator(browserDir, this.browserURL, browserDownloadDir);
+            configurator.setTest(this.test);
             Installer.launch(configurator);
         }
         return browserDir;
@@ -68,6 +72,11 @@ public class BrowserFactory {
      */
     public BrowserFactory enableReplaceExisting() {
         this.replaceExisting = true;
+        return this;
+    }
+
+    public BrowserFactory enableTest() {
+        this.test = true;
         return this;
     }
 }

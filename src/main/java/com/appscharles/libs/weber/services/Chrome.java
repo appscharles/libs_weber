@@ -1,8 +1,8 @@
 package com.appscharles.libs.weber.services;
 
 import com.appscharles.libs.weber.exceptions.WeberException;
+import com.appscharles.libs.weber.tabs.Tab;
 import io.webfolder.cdp.Launcher;
-import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
 
 import java.io.File;
@@ -16,9 +16,7 @@ import java.io.File;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public class Weber {
-
-    private Integer port;
+public class Chrome {
 
     private SessionFactory sessionFactory;
 
@@ -26,8 +24,7 @@ public class Weber {
 
     private File browserDir;
 
-    public Weber(Integer port, SessionFactory sessionFactory, Launcher launcher, File browserDir) {
-        this.port = port;
+    public Chrome(SessionFactory sessionFactory, Launcher launcher, File browserDir) {
         this.sessionFactory = sessionFactory;
         this.launcher = launcher;
         this.browserDir = browserDir;
@@ -38,12 +35,8 @@ public class Weber {
         new WeberKillService().kill(this.browserDir);
     }
 
-    public Session createSession(){
-        return this.sessionFactory.create();
-    }
-
-    public Integer getPort() {
-        return port;
+    public Tab createTab(){
+        return new Tab(this.sessionFactory.create());
     }
 
     public SessionFactory getSessionFactory() {

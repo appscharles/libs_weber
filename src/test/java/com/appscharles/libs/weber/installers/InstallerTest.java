@@ -26,6 +26,7 @@ public class InstallerTest extends TestCase {
         File downloadDir = this.temp.newFolder("download_dir");
         URL browserURL = new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0_test.zip");
         InstallerConfigurator configurator = new InstallerConfigurator(browserDir, browserURL, downloadDir);
+        configurator.setTest(true);
         Installer.launch(configurator);
     }
 }
