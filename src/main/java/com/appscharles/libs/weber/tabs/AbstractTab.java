@@ -1,5 +1,10 @@
 package com.appscharles.libs.weber.tabs;
 
+import com.appscharles.libs.weber.behaviors.InputFillBehavior;
+import com.appscharles.libs.weber.behaviors.NavigateBehavior;
+import com.appscharles.libs.weber.behaviors.WithWaitReloadBehavior;
+import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
+import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.session.Session;
 
 /**
@@ -11,7 +16,7 @@ import io.webfolder.cdp.session.Session;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public abstract class AbstractTab implements ISessionable, INavigatable {
+public abstract class AbstractTab implements ISessionable, INavigatable, IInputFillable, IWithWaitReloadable {
 
 
     protected Session session;
@@ -36,7 +41,16 @@ public abstract class AbstractTab implements ISessionable, INavigatable {
 
     @Override
     public void navigate(String url) {
-        getSession().navigate(url);
-        getSession().waitDocumentReady();
+        new NavigateBehavior(url, getSession()).apply();
+    }
+
+    @Override
+    public void inputFill(String value, String selector) throws WeberException {
+        new InputFillBehavior(value, selector, getSession()).apply();
+    }
+
+    @Override
+    public void withWaitReload(ThrowingConsumer consumer, long timeout) throws WeberException {
+        new WithWaitReloadBehavior(consumer, timeout, getSession()).apply();
     }
 }

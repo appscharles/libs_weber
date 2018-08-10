@@ -11,7 +11,7 @@ import com.appscharles.libs.weber.exceptions.WeberException;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public interface INavigatable {
+public interface IInputFillable {
 
-    void navigate(String url) throws WeberException;
+    void inputFill(String value, String selector) throws WeberException;
 }

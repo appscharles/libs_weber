@@ -3,6 +3,7 @@ package com.appscharles.libs.weber.factories;
 import com.appscharles.libs.weber.TestCase;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import com.appscharles.libs.weber.finders.AvailablePortFinder;
+import com.appscharles.libs.weber.services.WeberKillService;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
@@ -36,6 +37,8 @@ public class BrowserFactoryTest extends TestCase {
     @Test
     public void shouldOpenBrowser() throws IOException, WeberException {
         File browsersDir = new File(System.getProperty("java.io.tmpdir"), "browsers_test");
+        File browserDir = new File(browsersDir, "68.0/myApp");
+        new WeberKillService().kill(browserDir);
         BrowserFactory.create(
                 new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip"),
                 browsersDir, "myApp", "68.0").enableTest().build();

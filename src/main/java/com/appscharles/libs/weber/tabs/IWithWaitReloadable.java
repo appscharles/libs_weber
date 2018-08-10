@@ -1,5 +1,6 @@
 package com.appscharles.libs.weber.tabs;
 
+import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
 
 /**
@@ -11,7 +12,7 @@ import com.appscharles.libs.weber.exceptions.WeberException;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public interface INavigatable {
+public interface IWithWaitReloadable {
 
-    void navigate(String url) throws WeberException;
+    void withWaitReload( ThrowingConsumer consumer, long timeout) throws WeberException;
 }
