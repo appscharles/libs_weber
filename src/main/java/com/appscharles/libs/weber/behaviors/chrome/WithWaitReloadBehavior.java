@@ -1,4 +1,4 @@
-package com.appscharles.libs.weber.behaviors;
+package com.appscharles.libs.weber.behaviors.chrome;
 
 import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
@@ -22,7 +22,7 @@ import static io.webfolder.cdp.event.Events.NetworkRequestWillBeSent;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public class WithWaitReloadBehavior extends AbstractBehavior {
+public class WithWaitReloadBehavior extends AbstractChromeBehavior {
 
     private final ThrowingConsumer consumer;
 

@@ -1,11 +1,11 @@
-package com.appscharles.libs.weber.behaviors;
+package com.appscharles.libs.weber.behaviors.chrome;
 
 import io.webfolder.cdp.session.Session;
 
 /**
  * The type Navigate behavior.
  */
-public class NavigateBehavior extends AbstractBehavior {
+public class NavigateBehavior extends AbstractChromeBehavior {
 
     private String url;
 

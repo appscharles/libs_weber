@@ -1,4 +1,4 @@
-package com.appscharles.libs.weber.behaviors;
+package com.appscharles.libs.weber.behaviors.web;
 
 import com.appscharles.libs.weber.exceptions.WeberException;
 
@@ -11,7 +11,7 @@ import com.appscharles.libs.weber.exceptions.WeberException;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public interface IBehavior {
+public interface IWebBehavior {
 
     void apply() throws WeberException;
 }

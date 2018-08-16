@@ -1,4 +1,4 @@
-package com.appscharles.libs.weber.behaviors;
+package com.appscharles.libs.weber.behaviors.chrome;
 
 import io.webfolder.cdp.session.Session;
 
@@ -11,7 +11,7 @@ import io.webfolder.cdp.session.Session;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public class EmptyBehavior extends AbstractBehavior {
+public class EmptyBehavior extends AbstractChromeBehavior {
 
     public EmptyBehavior(Session session) {
         super(session);

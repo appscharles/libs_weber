@@ -1,8 +1,8 @@
 package com.appscharles.libs.weber.tabs;
 
-import com.appscharles.libs.weber.behaviors.InputFillBehavior;
-import com.appscharles.libs.weber.behaviors.NavigateBehavior;
-import com.appscharles.libs.weber.behaviors.WithWaitReloadBehavior;
+import com.appscharles.libs.weber.behaviors.chrome.InputFillBehavior;
+import com.appscharles.libs.weber.behaviors.chrome.NavigateBehavior;
+import com.appscharles.libs.weber.behaviors.chrome.WithWaitReloadBehavior;
 import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.session.Session;

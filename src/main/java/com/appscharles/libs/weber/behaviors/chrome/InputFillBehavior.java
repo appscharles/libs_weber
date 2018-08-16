@@ -1,4 +1,4 @@
-package com.appscharles.libs.weber.behaviors;
+package com.appscharles.libs.weber.behaviors.chrome;
 
 import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.session.Session;
@@ -12,7 +12,7 @@ import io.webfolder.cdp.session.Session;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public class InputFillBehavior extends AbstractBehavior {
+public class InputFillBehavior extends AbstractChromeBehavior {
 
     private String value;
 
