@@ -1,6 +1,6 @@
 package com.appscharles.libs.weber.behaviors.chrome;
 
-import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
+import com.appscharles.libs.fxer.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.command.Network;
 import io.webfolder.cdp.event.network.LoadingFinished;
@@ -24,11 +24,11 @@ import static io.webfolder.cdp.event.Events.NetworkRequestWillBeSent;
  */
 public class WithWaitReloadBehavior extends AbstractChromeBehavior {
 
-    private final ThrowingConsumer consumer;
+    private final ThrowingConsumer<WeberException> consumer;
 
     private final long timeout;
 
-    public WithWaitReloadBehavior(ThrowingConsumer consumer, long timeout, Session session) {
+    public WithWaitReloadBehavior(ThrowingConsumer<WeberException> consumer, long timeout, Session session) {
         super(session);
         this.consumer = consumer;
         this.timeout = timeout;

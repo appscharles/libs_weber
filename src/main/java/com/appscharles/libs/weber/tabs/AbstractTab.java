@@ -1,9 +1,9 @@
 package com.appscharles.libs.weber.tabs;
 
+import com.appscharles.libs.fxer.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.behaviors.chrome.InputFillBehavior;
 import com.appscharles.libs.weber.behaviors.chrome.NavigateBehavior;
 import com.appscharles.libs.weber.behaviors.chrome.WithWaitReloadBehavior;
-import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.session.Session;
 
@@ -50,7 +50,7 @@ public abstract class AbstractTab implements ISessionable, INavigatable, IInputF
     }
 
     @Override
-    public void withWaitReload(ThrowingConsumer consumer, long timeout) throws WeberException {
+    public void withWaitReload(ThrowingConsumer<WeberException> consumer, long timeout) throws WeberException {
         new WithWaitReloadBehavior(consumer, timeout, getSession()).apply();
     }
 }

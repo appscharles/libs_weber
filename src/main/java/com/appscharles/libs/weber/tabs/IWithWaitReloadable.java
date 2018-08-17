@@ -1,6 +1,6 @@
 package com.appscharles.libs.weber.tabs;
 
-import com.appscharles.libs.weber.exceptions.ThrowingConsumer;
+import com.appscharles.libs.fxer.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.exceptions.WeberException;
 
 /**
@@ -14,5 +14,5 @@ import com.appscharles.libs.weber.exceptions.WeberException;
  */
 public interface IWithWaitReloadable {
 
-    void withWaitReload( ThrowingConsumer consumer, long timeout) throws WeberException;
+    void withWaitReload(ThrowingConsumer<WeberException> consumer, long timeout) throws WeberException;
 }
