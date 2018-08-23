@@ -44,7 +44,7 @@ public class WebTest {
             }
         });
         Assert.assertNotNull(element);
-        Thread.sleep(20000);
+        Thread.sleep(5000);
     }
 
 }

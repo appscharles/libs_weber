@@ -1,7 +1,7 @@
 package com.appscharles.libs.weber.installers;
 
 import com.appscharles.libs.dialoger.factories.ExceptionDialogFactory;
-import com.appscharles.libs.fxer.controllers.AbstractControllerFX;
+import com.appscharles.libs.fxer.controllers.AbstractStageControllerFX;
 import com.appscharles.libs.ioer.downloaders.file.HttpFileDownloader;
 import com.appscharles.libs.ioer.downloaders.file.IFileDownloader;
 import com.appscharles.libs.ioer.downloaders.file.IStatusProgressable;
@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
  *
  * @author Karol Golec karol.itgolo@gmail.com
  */
-public class InstallerController extends AbstractControllerFX {
+public class InstallerController extends AbstractStageControllerFX {
 
     private static final Logger logger = LogManager.getLogger(InstallerController.class);
 
