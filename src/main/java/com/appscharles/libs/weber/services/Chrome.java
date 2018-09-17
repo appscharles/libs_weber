@@ -1,13 +1,12 @@
 package com.appscharles.libs.weber.services;
 
 import com.appscharles.libs.weber.exceptions.WeberException;
-import com.appscharles.libs.weber.tabs.Tab;
+import com.appscharles.libs.weber.finders.AvailablePortFinder;
+import com.appscharles.libs.weber.managers.TabsManager;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.SessionFactory;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The type Chrome.
@@ -20,7 +19,8 @@ public class Chrome {
 
     private File browserDir;
 
-    private Map<String, Tab> tabs;
+    private TabsManager tabsManager;
+
 
     /**
      * Instantiates a new Chrome.
@@ -33,7 +33,17 @@ public class Chrome {
         this.sessionFactory = sessionFactory;
         this.launcher = launcher;
         this.browserDir = browserDir;
-        this.tabs = new HashMap<>();
+        this.tabsManager = new TabsManager(this);
+
+    }
+
+    /**
+     * Getter for property 'tabsManager'.
+     *
+     * @return Value for property 'tabsManager'.
+     */
+    public TabsManager tabs() {
+        return this.tabsManager;
     }
 
     /**
@@ -47,66 +57,21 @@ public class Chrome {
     }
 
     /**
-     * Get tab tab.
-     *
-     * @param id the id
-     * @return the tab
-     */
-    public Tab getTab(String id){
-        synchronized (Chrome.class){
-            if (this.tabs.containsKey(id)){
-                Tab tab = this.tabs.get(id);
-                if (tab.getSession().isConnected() == false){
-                    return newTab(id);
-                }
-                return this.tabs.get(id);
-            }
-            return newTab(id);
-        }
-    }
-
-    /**
-     * Close tab.
-     *
-     * @param id the id
-     */
-    public void closeTab(String id){
-        synchronized (Chrome.class){
-            if (this.tabs.containsKey(id)){
-                Tab tab = this.tabs.get(id);
-                if (tab.getSession().isConnected() == false){
-                    tab.getSession().close();
-                }
-            }
-        }
-    }
-
-    /**
-     * Close all tabs.
-     */
-    public void closeAllTabs(){
-        synchronized (Chrome.class){
-            for (Map.Entry<String, Tab> tabEntry : this.tabs.entrySet()) {
-                if (tabEntry.getValue().getSession().isConnected() == false){
-                    tabEntry.getValue().getSession().close();
-                }
-            }
-        }
-    }
-
-    private Tab newTab(String id){
-        Tab tab =  new Tab(this.sessionFactory.create());
-        this.tabs.put(id, tab);
-        return tab;
-    }
-
-    /**
      * Gets session factory.
      *
      * @return the session factory
      */
     public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    /**
+     * Sets session factory.
+     *
+     * @param sessionFactory the session factory
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     /**
@@ -119,11 +84,31 @@ public class Chrome {
     }
 
     /**
+     * Sets launcher.
+     *
+     * @param launcher the launcher
+     */
+    public void setLauncher(Launcher launcher) {
+        this.launcher = launcher;
+    }
+
+    /**
      * Gets browser dir.
      *
      * @return the browser dir
      */
     public File getBrowserDir() {
         return browserDir;
+    }
+
+    /**
+     * Restart.
+     *
+     * @throws WeberException the weber exception
+     */
+    public void restart() throws WeberException {
+        this.close();
+        this.setLauncher(new Launcher(AvailablePortFinder.findBetween(10000, 15000)));
+        this.setSessionFactory(this.getLauncher().launch(new File(this.getBrowserDir(), "MyChrome.exe").toPath()));
     }
 }

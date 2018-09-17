@@ -23,7 +23,7 @@ public class ChromeTest {
     @Test
     public void shouldOpenBrowser() throws MalformedURLException, WeberException, InterruptedException {
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.getTab("id");
+        Tab tab = chrome.tabs().getDefaultTab();
         tab.getSession().navigate("https://news.ycombinator.com");
         tab.getSession().waitDocumentReady();
         chrome.close();
@@ -32,8 +32,22 @@ public class ChromeTest {
     @Test
     public void shouldOpenBrowser2() throws MalformedURLException, WeberException, InterruptedException {
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.getTab("id");
+        Tab tab = chrome.tabs().getDefaultTab();
         tab.navigate("https://news.ycombinator.com");
+        chrome.close();
+    }
+
+    @Test
+    public void shouldOpenTab2() throws MalformedURLException, WeberException, InterruptedException {
+        Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
+        Tab tab = chrome.tabs().getDefaultTab();
+        tab.navigate("https://news.ycombinator.com");
+
+        Tab tab2 = chrome.tabs().getDefaultTab();
+        tab2.navigate("https://news.ycombinator.com");
+        Thread.sleep(5000);
+        tab2 = chrome.tabs().getDefaultTab();
+        tab2.navigate("https://news.ycombinator.com");
         chrome.close();
     }
 }

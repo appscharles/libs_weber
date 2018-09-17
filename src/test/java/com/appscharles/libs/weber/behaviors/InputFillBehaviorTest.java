@@ -31,7 +31,7 @@ public class InputFillBehaviorTest extends TestCase {
         addRoute("/InputFillBehavior", readTestResource("com/appscharles/libs/weber/behaviors/InputFillBehavior.html"), httpServer);
         httpServer.start();
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.getTab("id");
+        Tab tab = chrome.tabs().getDefaultTab();
         tab.navigate("http://localhost:" + httpServer.port() + "/InputFillBehavior");
         tab.inputFill("content", "//input[@name='lname']");
         chrome.close();
