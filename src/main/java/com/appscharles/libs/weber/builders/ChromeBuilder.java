@@ -30,7 +30,7 @@ public class ChromeBuilder {
 
     private ChromeBuilder() {
         this.enableBrowserReplaceExisting = false;
-        this.test = test;
+        this.test = false;
     }
 
     /**
