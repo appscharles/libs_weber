@@ -1,6 +1,7 @@
 package com.appscharles.libs.weber.behaviors.chrome;
 
 import io.webfolder.cdp.session.Session;
+import io.webfolder.cdp.session.WaitUntil;
 
 /**
  * The type Navigate behavior.
@@ -8,6 +9,8 @@ import io.webfolder.cdp.session.Session;
 public class NavigateBehavior extends AbstractChromeBehavior {
 
     private String url;
+
+    private Integer timeout;
 
     /**
      * Instantiates a new Navigate behavior.
@@ -17,6 +20,7 @@ public class NavigateBehavior extends AbstractChromeBehavior {
      */
     public NavigateBehavior(String url, Session session) {
         super(session);
+        this.timeout = 120 * 1000;
         this.url = url;
     }
 
@@ -24,7 +28,6 @@ public class NavigateBehavior extends AbstractChromeBehavior {
      * Apply.
      */
     public void apply() {
-        this.session.navigate(this.url);
-        this.session.waitDocumentReady();
+        this.session.navigateAndWait(this.url, WaitUntil.DomReady, this.timeout);
     }
 }

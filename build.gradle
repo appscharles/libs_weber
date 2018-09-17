@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.appscharles.libs'
-version '1.0.0.0-dev8'
+version '1.0.0.0-dev9'
 
 sourceCompatibility = 1.8
 
@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     compile group: 'org.jvnet.winp', name: 'winp', version: '1.27'
-    compile group: 'io.webfolder', name: 'cdp4j', version: '3.0.5'
+    compile group: 'io.webfolder', name: 'cdp4j', version: '3.0.6'
     testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.18.0'
     compile group: 'com.appscharles.libs', name: 'processer', version: '1.0.0.0-dev6'
     compile group: 'com.appscharles.libs', name: 'dialoger', version: '1.0.0.0-dev14'
