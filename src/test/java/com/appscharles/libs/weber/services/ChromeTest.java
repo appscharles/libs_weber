@@ -23,7 +23,7 @@ public class ChromeTest {
     @Test
     public void shouldOpenBrowser() throws MalformedURLException, WeberException, InterruptedException {
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.createTab();
+        Tab tab = chrome.getTab("id");
         tab.getSession().navigate("https://news.ycombinator.com");
         tab.getSession().waitDocumentReady();
         chrome.close();
@@ -32,7 +32,7 @@ public class ChromeTest {
     @Test
     public void shouldOpenBrowser2() throws MalformedURLException, WeberException, InterruptedException {
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.createTab();
+        Tab tab = chrome.getTab("id");
         tab.navigate("https://news.ycombinator.com");
         chrome.close();
     }

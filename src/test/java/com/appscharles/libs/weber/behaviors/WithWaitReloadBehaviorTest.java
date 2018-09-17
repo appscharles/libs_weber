@@ -32,7 +32,7 @@ public class WithWaitReloadBehaviorTest extends TestCase {
         addRoute("/WithWaitReloadSecondaryBehavior", readTestResource("com/appscharles/libs/weber/behaviors/WithWaitReloadSecondaryBehavior.html"), httpServer );
         httpServer.start();
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.createTab();
+        Tab tab = chrome.getTab("id");
         tab.navigate("http://localhost:" + httpServer.port() + "/WithWaitReloadBasicBehavior");
         tab.withWaitReload(()->{
             tab.getSession().click("//input");
@@ -48,7 +48,7 @@ public class WithWaitReloadBehaviorTest extends TestCase {
         addRoute("/WithWaitReloadSecondaryBehavior", 4000, readTestResource("com/appscharles/libs/weber/behaviors/WithWaitReloadSecondaryBehavior.html"), httpServer );
         httpServer.start();
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.createTab();
+        Tab tab = chrome.getTab("id");
         tab.navigate("http://localhost:" + httpServer.port() + "/WithWaitReloadBasicBehavior");
         tab.withWaitReload(()->{
             tab.getSession().click("//input");

@@ -26,12 +26,12 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 public class InputFillBehaviorTest extends TestCase {
 
     @Test
-    public void shouldFillInput() throws WeberException, IOException, InterruptedException {
+    public void shouldFillInput() throws WeberException, IOException {
         WireMockRule httpServer = new WireMockRule(wireMockConfig().dynamicPort());
         addRoute("/InputFillBehavior", readTestResource("com/appscharles/libs/weber/behaviors/InputFillBehavior.html"), httpServer);
         httpServer.start();
         Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
-        Tab tab = chrome.createTab();
+        Tab tab = chrome.getTab("id");
         tab.navigate("http://localhost:" + httpServer.port() + "/InputFillBehavior");
         tab.inputFill("content", "//input[@name='lname']");
         chrome.close();
