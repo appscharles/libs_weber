@@ -3,26 +3,24 @@ package com.appscharles.libs.weber.tabs;
 import com.appscharles.libs.fxer.exceptions.ThrowingConsumer;
 import com.appscharles.libs.weber.behaviors.chrome.InputFillBehavior;
 import com.appscharles.libs.weber.behaviors.chrome.NavigateBehavior;
+import com.appscharles.libs.weber.behaviors.chrome.WaitContentBehavior;
 import com.appscharles.libs.weber.behaviors.chrome.WithWaitReloadBehavior;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import io.webfolder.cdp.session.Session;
 
 /**
- * IDE Editor: IntelliJ IDEA
- * <p>
- * Date: 10.08.2018
- * Time: 12:56
- * Project name: weber
- *
- * @author Karol Golec karol.itgolo@gmail.com
+ * The type Abstract tab.
  */
-public abstract class AbstractTab implements ISessionable, INavigatable, IInputFillable, IWithWaitReloadable {
+public abstract class AbstractTab implements ISessionable, INavigatable, IInputFillable, IWithWaitReloadable, IContentWaitable {
 
 
+    /**
+     * The Session.
+     */
     protected Session session;
 
     /**
-     * Instantiates a new Tab.
+     * Instantiates a new Abstract tab.
      *
      * @param session the session
      */
@@ -30,11 +28,6 @@ public abstract class AbstractTab implements ISessionable, INavigatable, IInputF
         this.session = session;
     }
 
-    /**
-     * Getter for property 'session'.
-     *
-     * @return Value for property 'session'.
-     */
     public Session getSession() {
         return session;
     }
@@ -52,5 +45,10 @@ public abstract class AbstractTab implements ISessionable, INavigatable, IInputF
     @Override
     public void withWaitReload(ThrowingConsumer<WeberException> consumer, long timeout) throws WeberException {
         new WithWaitReloadBehavior(consumer, timeout, getSession()).apply();
+    }
+
+    @Override
+    public void waitContent(String content, long timeout) throws WeberException {
+        new WaitContentBehavior(content, timeout, getSession()).apply();
     }
 }
