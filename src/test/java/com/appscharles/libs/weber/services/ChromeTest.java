@@ -3,6 +3,7 @@ package com.appscharles.libs.weber.services;
 import com.appscharles.libs.weber.builders.ChromeBuilder;
 import com.appscharles.libs.weber.exceptions.WeberException;
 import com.appscharles.libs.weber.tabs.Tab;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,7 +23,8 @@ public class ChromeTest {
 
     @Test
     public void shouldOpenBrowser() throws MalformedURLException, WeberException, InterruptedException {
-        Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip")).enableTest().build();
+        Chrome chrome = ChromeBuilder.create("myApp", "68.0", new File(System.getProperty("java.io.tmpdir"), "browsers_test"), new URL("https://bitbucket.org/appscharles/resources_java/downloads/Chrome_68.0.zip"))
+                .setArguments(Lists.newArrayList("--headless", "--disable-gpu")).enableTest().build();
         Tab tab = chrome.tabs().getDefaultTab();
         tab.getSession().navigate("https://news.ycombinator.com");
         tab.getSession().waitDocumentReady();
